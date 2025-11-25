@@ -649,3 +649,141 @@ button:hover {
 .tech-border:hover::before {
   opacity: 0.5;
 }
+
+/* 科技风移动端优化 */
+@media (max-width: 768px) {
+  .glass-effect {
+    backdrop-filter: blur(10px); /* 降低移动端模糊强度 */
+  }
+  
+  .neon-glow {
+    text-shadow: 0 0 3px currentColor, 0 0 6px currentColor; /* 减弱发光效果 */
+  }
+  
+  .tech-button {
+    padding: 10px 20px; /* 减小按钮尺寸 */
+    font-size: 14px;
+  }
+  
+  .tech-input {
+    font-size: 16px; /* 保持iOS兼容性 */
+  }
+  
+  /* 移动端性能优化 */
+  .data-flow::after {
+    animation-duration: 4s; /* 减慢动画速度 */
+  }
+  
+  body::before {
+    animation-duration: 30s; /* 减慢网格动画 */
+  }
+}
+
+/* 科技风小屏幕优化 */
+@media (max-width: 480px) {
+  :root {
+    --border-radius: 6px; /* 减小圆角 */
+    --glass-radius: 12px;
+  }
+  
+  .tech-button {
+    padding: 8px 16px; /* 进一步减小按钮尺寸 */
+    font-size: 13px;
+  }
+  
+  .neon-glow {
+    animation: none; /* 小屏幕禁用动画以提升性能 */
+  }
+  
+  body::before {
+    background-size: 30px 30px; /* 减小网格大小 */
+    animation-duration: 40s;
+  }
+  
+  .codeScan {
+    animation-duration: 3s; /* 减慢代码扫描动画 */
+  }
+  
+  .tech-glow {
+    animation-duration: 3s; /* 减慢发光动画 */
+  }
+}
+
+/* 科技风横屏优化 */
+@media (max-height: 500px) and (orientation: landscape) {
+  .neon-glow {
+    text-shadow: 0 0 2px currentColor; /* 横屏时进一步减弱发光 */
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(5px); /* 横屏时降低模糊 */
+  }
+}
+
+/* 科技风高分辨率屏幕优化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .neon-glow {
+    text-shadow: 0 0 8px currentColor, 0 0 16px currentColor, 0 0 24px currentColor;
+  }
+  
+  .tech-border::before {
+    opacity: 0.8; /* 高分辨率屏幕增强边框效果 */
+  }
+}
+
+/* 科技风暗色模式移动端优化 */
+@media (prefers-color-scheme: dark) and (max-width: 768px) {
+  :root {
+    --primary-neon: #00ff88;
+    --secondary-neon: #ff0088;
+    --accent-cyan: #00ffff;
+    --glass-bg: rgba(0, 255, 136, 0.05);
+    --glass-border: rgba(0, 255, 136, 0.2);
+  }
+  
+  body::before {
+    background-image: 
+      linear-gradient(rgba(0, 255, 136, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
+  }
+}
+
+/* 科技风微信浏览器优化 */
+@media screen and (max-width: 768px) {
+  /* 防止微信浏览器底部工具栏遮挡 */
+  body {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  
+  /* 优化微信内按钮触摸 */
+  button, a, [role="button"] {
+    -webkit-tap-highlight-color: rgba(0, 212, 255, 0.1);
+    touch-action: manipulation;
+  }
+  
+  /* 输入框优化 - 防止微信输入法遮挡 */
+  textarea, input {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+  /* 微信浏览器科技风优化 */
+  .tech-input {
+    border: 2px solid var(--glass-border);
+    background: rgba(0, 212, 255, 0.1);
+  }
+  
+  .tech-button {
+    border: 2px solid var(--primary-neon);
+    background: transparent;
+  }
+}
+
+/* 科技风安全区域适配 */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+}
